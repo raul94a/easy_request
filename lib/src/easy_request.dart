@@ -9,7 +9,7 @@ Map<String, dynamic> _availableFunctions = {
   'DELETE': http.delete,
   'PUT': http.put
 };
-throwError(String method, Map<String, dynamic>? body) {
+_throwError(String method, Map<String, dynamic>? body) {
   if (!_availableMethods.contains(method)) {
     throw _RequestException(type: 'METHOD');
   } else if ((method == 'PUT' || method == 'POST') && body == null) {
@@ -33,7 +33,7 @@ dynamic request({
   Map<String, dynamic>? body,
 }) async {
   method = method.toUpperCase();
-  throwError(method, body);
+  _throwError(method, body);
 
   headers = headers ?? {};
   if (method == 'PUT' || method == 'POST') {
@@ -46,7 +46,7 @@ dynamic request({
       //PUT, POST, DELETE
       : await _availableFunctions[method](Uri.parse(url),
           headers: headers, body: jsonEncode(body));
-  if (method == 'DELETE') print(response.body);
+  // if (method == 'DELETE') print(response.body);
   return response.body.isEmpty
       ? 'No data sent back to user'
       : jsonDecode(response.body);
