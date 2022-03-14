@@ -1,6 +1,6 @@
 name: easy_request
 description: A Dart package to easily make http requests.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/raul94a/easy_request
 
 environment:
